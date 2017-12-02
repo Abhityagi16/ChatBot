@@ -8,6 +8,7 @@ public class Message {
     private String chatBotName, message;
     private long chatBotID;
     private MessageType messageType;
+    private long timestamp;
 
     public Message(long chatBotID, String message) {
         this.message = message;
@@ -16,6 +17,14 @@ public class Message {
 
     public MessageType getMessageType() {
         return messageType;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setMessageType(MessageType messageType) {

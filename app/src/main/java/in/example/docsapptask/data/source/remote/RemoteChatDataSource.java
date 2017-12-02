@@ -4,6 +4,7 @@ import android.accounts.NetworkErrorException;
 import android.app.Service;
 
 import in.example.docsapptask.data.models.Message;
+import in.example.docsapptask.data.models.MessageType;
 import in.example.docsapptask.data.response.ServiceResponse;
 import in.example.docsapptask.data.source.ChatDataSource;
 import io.reactivex.Scheduler;
@@ -65,7 +66,10 @@ public class RemoteChatDataSource {
                     public SingleSource<? extends Message> apply(ServiceResponse serviceResponse) throws Exception {
                         if (serviceResponse.getSuccess() == 1 && serviceResponse.getErrorMessage
                                 ().isEmpty()) {
-                            return Single.just(serviceResponse.getMessage());
+                            Message msg = serviceResponse.getMessage();
+                            msg.setMessageType(MessageType.RECEIVED);
+                            msg.setTimestamp(System.currentTimeMillis());
+                            return Single.just(msg);
                         }
                         return Single.error(new NetworkErrorException(serviceResponse
                                 .getErrorMessage()));

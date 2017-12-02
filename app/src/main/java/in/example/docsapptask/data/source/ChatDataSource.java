@@ -13,5 +13,6 @@ public interface ChatDataSource {
 
     Single<Message> sendMessage(Message message);
     Single<List<Message>> loadMessages();
+    void closeDatabase();
 
 }

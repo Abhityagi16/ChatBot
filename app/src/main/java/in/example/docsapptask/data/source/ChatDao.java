@@ -24,10 +24,6 @@ public class ChatDao implements ChatDataSource {
     private final RemoteChatDataSource mChatRemoteDataSource;
 
     private final LocalChatDataSource  mChatLocalDataSource;        //Since we are not storing
-    // data in local db this variable won't be used
-    Message mCachedResponse;        //We'll keep data in cache in case of device rotation
-
-    boolean mIsCacheDirty = false;
 
     private ChatDao(@NonNull RemoteChatDataSource chatRemoteDataSource,
                        @NonNull LocalChatDataSource chatLocalDataSource) {
@@ -46,6 +42,7 @@ public class ChatDao implements ChatDataSource {
 
     @Override
     public Single<Message> sendMessage(Message message) {
+        mChatLocalDataSource.saveMessage(message);
         return mChatRemoteDataSource.sendMessage(message)
                 .doOnSuccess(new Consumer<Message>() {
                     @Override
@@ -58,5 +55,10 @@ public class ChatDao implements ChatDataSource {
     @Override
     public Single<List<Message>> loadMessages() {
         return mChatLocalDataSource.loadMessages();
+    }
+
+    @Override
+    public void closeDatabase() {
+        mChatLocalDataSource.closeDatabase();
     }
 }

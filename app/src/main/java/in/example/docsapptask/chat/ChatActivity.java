@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import in.example.docsapptask.R;
 import in.example.docsapptask.data.models.Message;
+import in.example.docsapptask.data.source.DaoManager;
 
 public class ChatActivity extends AppCompatActivity implements ChatActivityContract.View, View.OnClickListener {
 
@@ -29,7 +33,7 @@ public class ChatActivity extends AppCompatActivity implements ChatActivityContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        mPresenter = new ChatListPresenter(this);
+        mPresenter = new ChatListPresenter(this, DaoManager.getChatDao(this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager
                 .VERTICAL, false);
 
@@ -40,7 +44,7 @@ public class ChatActivity extends AppCompatActivity implements ChatActivityContr
         mAdapter = new ChatAdapter(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
+        mPresenter.loadSavedMessages();
     }
 
     @Override
@@ -54,8 +58,25 @@ public class ChatActivity extends AppCompatActivity implements ChatActivityContr
     }
 
     @Override
+    public void setMessages(List<Message> messages) {
+        mAdapter.setMessages(messages);
+        mRecyclerView.scrollToPosition(messages.size()-1);
+    }
+
+    @Override
     public void clearMessage() {
         msgBox.setText("");
+    }
+
+    @Override
+    public void showErrorToast(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.releaseResources();
     }
 
     @Override

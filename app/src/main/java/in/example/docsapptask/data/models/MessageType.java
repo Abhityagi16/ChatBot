@@ -17,4 +17,11 @@ public enum MessageType {
         return id;
     }
 
+    public static MessageType getEnumById(int id) {
+        for (MessageType e: MessageType.values()) {
+            if(e.getId() == id) return e;
+        }
+        return null;
+    }
+
 }
