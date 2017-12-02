@@ -18,7 +18,7 @@ import retrofit2.http.Query;
  * Created by abhishektyagi on 02/12/17.
  */
 
-public class RemoteChatDataSource implements ChatDataSource {
+public class RemoteChatDataSource {
 
     private static final String API_URL = "https://www.personalityforge.com/";
     private static final String API_KEY = "6nt5d1nJHkqbkphe";
@@ -52,8 +52,7 @@ public class RemoteChatDataSource implements ChatDataSource {
                 , @Query("message") String message);
     }
 
-    @Override
-    public Single<Message> getResponse(Message message) {
+    public Single<Message> sendMessage(Message message) {
         ChatAPI chatAPI = mRetrofit.create(ChatAPI.class);
         return chatAPI.getChat(API_KEY, message.getChatBotID(), EXTERNAL_ID, message.getMessage())
                 .flatMap(new Function<ServiceResponse, SingleSource<? extends Message>>() {

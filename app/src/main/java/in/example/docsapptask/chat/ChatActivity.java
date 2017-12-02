@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ProgressBar;
 
 import in.example.docsapptask.R;
+import in.example.docsapptask.data.models.Message;
 
 public class ChatActivity extends AppCompatActivity implements ChatActivityContract.View {
 
@@ -27,10 +28,15 @@ public class ChatActivity extends AppCompatActivity implements ChatActivityContr
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager
                 .VERTICAL, false);
 
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.chat_list);
         mAdapter = new ChatAdapter(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void addMessage(Message message) {
+        mAdapter.addMessage(message);
     }
 }

@@ -1,5 +1,7 @@
 package in.example.docsapptask.data.source;
 
+import java.util.List;
+
 import in.example.docsapptask.data.models.Message;
 import io.reactivex.Single;
 
@@ -9,6 +11,7 @@ import io.reactivex.Single;
 
 public interface ChatDataSource {
 
-    Single<Message> getResponse(Message message);
+    Single<Message> sendMessage(Message message);
+    Single<List<Message>> loadMessages();
 
 }

@@ -7,6 +7,20 @@ package in.example.docsapptask.data.models;
 public class Message {
     private String chatBotName, message;
     private long chatBotID;
+    private MessageType messageType;
+
+    public Message(long chatBotID, String message) {
+        this.message = message;
+        this.chatBotID = chatBotID;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
+    }
 
     public String getChatBotName() {
         return chatBotName;

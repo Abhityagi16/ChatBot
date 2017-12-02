@@ -1,7 +1,10 @@
 package in.example.docsapptask.data.source.local;
 
+import java.util.List;
+
 import in.example.docsapptask.data.models.Message;
 import in.example.docsapptask.data.source.ChatDataSource;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -9,7 +12,7 @@ import io.reactivex.Single;
  */
 
 
-public class LocalChatDataSource implements ChatDataSource {
+public class LocalChatDataSource {
 
     private static LocalChatDataSource INSTANCE;
 
@@ -26,8 +29,10 @@ public class LocalChatDataSource implements ChatDataSource {
 
     }
 
-    @Override
-    public Single<Message> getResponse(Message message) {
+    public Single<List<Message>> loadMessages() {
         return null;
+    }
+
+    public void saveMessage(Message message) {
     }
 }
