@@ -1,13 +1,18 @@
 package in.example.docsapptask.data.source.remote;
 
 import android.accounts.NetworkErrorException;
+import android.app.Service;
 
 import in.example.docsapptask.data.models.Message;
 import in.example.docsapptask.data.response.ServiceResponse;
 import in.example.docsapptask.data.source.ChatDataSource;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,7 +25,7 @@ import retrofit2.http.Query;
 
 public class RemoteChatDataSource {
 
-    private static final String API_URL = "https://www.personalityforge.com/";
+    private static final String API_URL = "http://www.personalityforge.com/";
     private static final String API_KEY = "6nt5d1nJHkqbkphe";
     private static final String EXTERNAL_ID = "chirag1";
 
@@ -45,10 +50,10 @@ public class RemoteChatDataSource {
     }
 
     private interface ChatAPI {
-        @GET("api/chat")
+        @GET("api/chat/")
         Single<ServiceResponse> getChat(@Query("apiKey") String apiKey
-                , @Query("chatBotId") long chatBotId
-                , @Query("externalId") String externalId
+                , @Query("chatBotID") long chatBotID
+                , @Query("externalID") String externalId
                 , @Query("message") String message);
     }
 

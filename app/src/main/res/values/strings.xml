@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">DocsAppTask</string>
+    <string name="app_name">ChatBot</string>
+    <string name="send">Send</string>
+    <string name="placeholder">Enter message here</string>
 </resources>

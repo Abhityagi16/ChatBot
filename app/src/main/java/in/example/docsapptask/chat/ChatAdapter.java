@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import in.example.docsapptask.R;
@@ -25,6 +26,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     public ChatAdapter(Context context) {
         this.mContext = context;
+        mMessages = new ArrayList<>();
     }
 
     public void addMessage(Message message) {
