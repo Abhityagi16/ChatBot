@@ -5,17 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context="in.example.docsapptask.chat.ChatActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@android:color/white"
         android:layout_alignParentBottom="true">
         <TextView
             android:id="@+id/send"
@@ -28,6 +31,7 @@
             android:id="@+id/msg_box"
             android:layout_toLeftOf="@id/send"
             android:layout_alignParentLeft="true"
+            android:paddingLeft="10dp"
             android:hint="@string/placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

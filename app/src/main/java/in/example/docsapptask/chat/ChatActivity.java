@@ -54,7 +54,13 @@ public class ChatActivity extends AppCompatActivity implements ChatActivityContr
     }
 
     @Override
+    public void clearMessage() {
+        msgBox.setText("");
+    }
+
+    @Override
     public void addMessage(Message message) {
         mAdapter.addMessage(message);
+        mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
     }
 }

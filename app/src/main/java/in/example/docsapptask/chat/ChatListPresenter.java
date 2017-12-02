@@ -5,8 +5,6 @@ import in.example.docsapptask.data.models.Message;
 import in.example.docsapptask.data.models.MessageType;
 import in.example.docsapptask.data.source.ChatDao;
 import in.example.docsapptask.data.source.DaoManager;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.schedulers.Schedulers;
@@ -45,6 +43,7 @@ public class ChatListPresenter implements ChatActivityContract.Presenter {
         Message msg = new Message(CHATBOT_ID, message);
         msg.setMessageType(MessageType.SENT);
         mChatView.addMessage(msg);
+        mChatView.clearMessage();
         mChatDao.sendMessage(msg)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

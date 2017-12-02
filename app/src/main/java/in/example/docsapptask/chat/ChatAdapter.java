@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(ChatViewHolder holder, int position) {
-
+        Message msg = mMessages.get(position);
+        holder.message.setText(msg.getMessage());
     }
 
 
@@ -67,10 +69,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     }
 
     class ChatViewHolder extends RecyclerView.ViewHolder {
-
+        TextView message;
 
         public ChatViewHolder(View itemView) {
+
             super(itemView);
+            message = itemView.findViewById(R.id.message);
         }
     }
 }

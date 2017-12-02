@@ -12,6 +12,7 @@ import in.example.docsapptask.data.models.Message;
 public interface ChatActivityContract {
     interface View extends BaseView<Presenter> {
         void addMessage(Message message);
+        void clearMessage();
     }
 
     interface Presenter extends BasePresenter {
